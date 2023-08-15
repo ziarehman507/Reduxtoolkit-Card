@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
+import { Provider } from 'react-redux';
+import Login from './src/component/login&signup/Login';
+import Signup from './src/component/login&signup/Signup';
+import store from './src/ReduxStore/store';
+import 'expo-dev-client';
+import Home from './src/component/login&signup/Home';
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    
+ 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+      <NavigationContainer>
+           <Provider store={store}>
+        <Stack.Navigator initialRouteName="Signup" screenOptions={{headerShown:false}}>
+
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Home" component={Home} />
+
+
+        </Stack.Navigator>
+        
+     </Provider>
+      </NavigationContainer>
+  );
+};
+
+export default App;
